@@ -7,7 +7,7 @@ class DetailScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         child: Center(
-          child:Text('Details Scren'),
+          child:Text('Gaaaaaaaas Scren'),
         ),
       ),  
     );
