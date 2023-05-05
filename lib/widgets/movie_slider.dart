@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movie/models/models.dart';
 
 class MoviSlider extends StatelessWidget {
+
+  final List<Movie> movies;
+  final String? title;
+
+  const MoviSlider({super.key, required this.movies, this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -11,9 +17,10 @@ class MoviSlider extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 
-        const Padding(
+          if (this.title != null)
+        Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
-            child:Text('Popular',style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)
+            child:Text( this.title!, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)
             ),
 
           const SizedBox(height: 11),
@@ -21,8 +28,8 @@ class MoviSlider extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 20,
-              itemBuilder: ( _, int index) => _MoviePoster()
+              itemCount: movies.length,
+              itemBuilder: ( _, int index) => _MoviePoster( movies [index])
             ),
           ),
 
@@ -34,6 +41,9 @@ class MoviSlider extends StatelessWidget {
 
 
 class _MoviePoster extends StatelessWidget {
+
+  final Movie movie;
+  const _MoviePoster(this.movie);
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +58,11 @@ class _MoviePoster extends StatelessWidget {
             onTap: () => Navigator.pushNamed(context, 'details', arguments:'movie-instance'),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: const FadeInImage(
+              child:  FadeInImage(
                 placeholder: AssetImage('assets/img/no-image.jpg'),
-                image: NetworkImage('https://via.placeholder.com/300x400'),
+                image: NetworkImage(movie.fullPosterImg),
                 width: 130,
-                height: 190,
+                height: 175,
                 fit: BoxFit.cover,
               ),
             ),
@@ -60,7 +70,8 @@ class _MoviePoster extends StatelessWidget {
 
           const SizedBox(height: 5),
 
-          const Text('Dota 2 | 7.33',
+          Text(
+                movie.title,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
