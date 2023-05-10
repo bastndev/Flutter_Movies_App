@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_movie/models/models.dart';
-import 'package:flutter_movie/providers/movies_provider.dart';
-import 'package:flutter_movie/widgets/widgets.dart';
+
 import 'package:provider/provider.dart';
+import 'package:flutter_movie/widgets/widgets.dart';
+
+import 'package:flutter_movie/search/search_delegate.dart';
+import 'package:flutter_movie/providers/movies_provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -10,7 +12,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
 
     final moviesProvider = Provider.of<MoviesProvider>(context);
     /* Si te bota algun error Activa esto  */
@@ -24,7 +25,8 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
-            onPressed: (){},) 
+            onPressed: () => showSearch(context: context, delegate: MovieSearchDelegate() ),
+          ) 
         ],
       ),
       body: SingleChildScrollView(

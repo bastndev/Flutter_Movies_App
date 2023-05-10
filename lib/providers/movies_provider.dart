@@ -2,6 +2,7 @@
 // import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_movie/models/models.dart';
+import 'package:flutter_movie/models/search_response.dart';
 // import 'package:flutter_movie/models/popular_response.dart';
 import 'package:http/http.dart' as http;
 
@@ -28,7 +29,7 @@ class MoviesProvider extends ChangeNotifier{
 
   Future<String> _getJsonData( String endpoint, [int page = 1]) async{
 
-    var url = Uri.https(_baseUrl,endpoint, {
+    final url = Uri.https(_baseUrl,endpoint, {
       'api_key':_apiKey,
       'language':_language,
       'page':'$page'
@@ -42,9 +43,9 @@ class MoviesProvider extends ChangeNotifier{
   getOnDisplayMovies() async {
 
     final jsonData = await _getJsonData('3/movie/now_playing');
-    final NowPlayingResponse =NowPlaingResponse.fromJson(jsonData);
+    final nowPlayingResponse =NowPlaingResponse.fromJson(jsonData);
 
-    onDisplayMovies = NowPlayingResponse.results;
+    onDisplayMovies = nowPlayingResponse.results;
 
     notifyListeners();
   }
@@ -74,4 +75,17 @@ class MoviesProvider extends ChangeNotifier{
     return creditsResponse.cast;
   }
 
+  Future<List<Movie>> searchMovie(String query) async{
+
+    final url = Uri.https(_baseUrl,'3/search/movie', {
+      'api_key' :_apiKey,
+      'language':_language,
+      // 'page':'$page'
+      'query'   :query
+    });
+    final response = await http.get(url);
+    final searchResponse = SearchResponse.fromJson( response.body);
+
+    return searchResponse.results;
+  }
 }
