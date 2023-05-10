@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie/models/models.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
 class MoviSlider extends StatefulWidget {
 
@@ -16,7 +16,7 @@ class MoviSlider extends StatefulWidget {
 
 class _MoviSliderState extends State<MoviSlider> {
 
-  final ScrollController scrollController = new ScrollController();
+  final ScrollController scrollController = ScrollController();
 
   @override
   void initState(){

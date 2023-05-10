@@ -23,7 +23,7 @@ class DetailScreen extends StatelessWidget {
               _Overview(movie),
               _Overview(movie),
               const SizedBox(height: 10,),
-              CastingCards()
+              CastingCards(movie.id)
 
             ]),
           )
@@ -61,7 +61,7 @@ class _CustomAppBar extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
-
+        
         background: FadeInImage(
           placeholder: const AssetImage('assets/img/loading.gif'),
           image: NetworkImage(movie.fullBackdropPath),
