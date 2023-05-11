@@ -7,7 +7,7 @@ import 'package:flutter_movie/providers/movies_provider.dart';
 
 void main() => runApp(AppState());
 
-class AppState extends StatelessWidget {
+class AppState extends StatelessWidget { 
 
   @override
   Widget build(BuildContext context) {
