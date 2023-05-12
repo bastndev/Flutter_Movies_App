@@ -1,6 +1,9 @@
 
 // import 'dart:convert';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_movie/helpers/debouncer.dart';
 import 'package:flutter_movie/models/models.dart';
 import 'package:flutter_movie/models/search_response.dart';
 // import 'package:flutter_movie/models/popular_response.dart';
@@ -20,11 +23,23 @@ class MoviesProvider extends ChangeNotifier{
 
   int _popuparPage = 0;
 
+  final deboucer = Debouncer(
+    duration: Duration(milliseconds: 500), 
+    
+  );
+
+  final StreamController<List<Movie>>_suggestionStreamController = new StreamController.broadcast();
+  Stream<List<Movie>> get suggestionStream  =>this._suggestionStreamController.stream;
+  
+
+
+
   MoviesProvider(){
     // print('MoviesProvider Initial ');
 
     getOnDisplayMovies();
     getPopularMovies();
+
   }
 
   Future<String> _getJsonData( String endpoint, [int page = 1]) async{
@@ -86,6 +101,20 @@ class MoviesProvider extends ChangeNotifier{
     final response = await http.get(url);
     final searchResponse = SearchResponse.fromJson( response.body);
 
-    return searchResponse.results;
+    return searchResponse.results;  
+  }
+
+  void getSuggertionsByQuery( String searchTerm){
+
+    deboucer.value = '';
+    deboucer.onValue = ( value) async{
+      // print('Tenemos Valo a Buscar papus:$value');
+      final results = await this.searchMovie(value);
+      this._suggestionStreamController.add(results);
+    };
+      final timer = Timer.periodic(Duration(milliseconds: 300), (_){
+        deboucer.value =searchTerm;
+      });
+      Future.delayed(Duration(milliseconds: 301)).then((value) => timer.cancel());
   }
 }
