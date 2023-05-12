@@ -89,13 +89,16 @@ class _PosterAndTitle extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child:  FadeInImage(
-              placeholder: const AssetImage('assets/img/no-image.jpg'),
-              image: NetworkImage( movie.fullPosterImg),
-              height: 250,
-              // width: 110,
+          Hero(
+            tag: movie.id,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child:  FadeInImage(
+                placeholder: const AssetImage('assets/img/no-image.jpg'),
+                image: NetworkImage( movie.fullPosterImg),
+                height: 250,
+                // width: 110,
+              ),
             ),
           ),
 

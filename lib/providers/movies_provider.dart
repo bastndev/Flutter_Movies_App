@@ -79,7 +79,7 @@ class MoviesProvider extends ChangeNotifier{
 
     final url = Uri.https(_baseUrl,'3/search/movie', {
       'api_key' :_apiKey,
-      'language':_language,
+      'language':_language, 
       // 'page':'$page'
       'query'   :query
     });
