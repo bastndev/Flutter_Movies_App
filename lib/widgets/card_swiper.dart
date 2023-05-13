@@ -2,11 +2,11 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_movie/models/models.dart';
 
-class CardSwiper extends StatelessWidget {
+class CardSwiped extends StatelessWidget {
 
   final List <Movie> movies;
 
-  const CardSwiper({super.key, required this.movies}); 
+  const CardSwiped({super.key, required this.movies}); 
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class CardSwiper extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
 
-    if(this.movies.length == 0 ){
+    if(movies.isEmpty ){
       return  Container(
         width: double.infinity,
         height: size.height* 0.5,
@@ -24,7 +24,7 @@ class CardSwiper extends StatelessWidget {
       );
     }
 
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: size.height * 0.5,
       // color: Colors.red,

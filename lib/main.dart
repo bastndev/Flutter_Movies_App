@@ -4,10 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:flutter_movie/screens/screens.dart';
 import 'package:flutter_movie/providers/movies_provider.dart';
 
+void main() => runApp(const AppState());
 
-void main() => runApp(AppState());
-
-class AppState extends StatelessWidget { 
+class AppState extends StatelessWidget {
+  const AppState({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +29,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Peliculas',
+      title: 'Pedicular',
       initialRoute: 'home',
       routes: {
-        'home':(_) => HomeScreen(), 
+        'home':(_) => const HomeScreen(), 
         'details':(_) => DetailScreen(), 
       },
       theme: ThemeData.light().copyWith(

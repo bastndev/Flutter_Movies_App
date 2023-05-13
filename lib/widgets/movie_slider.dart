@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_movie/models/models.dart';
 // import 'package:provider/provider.dart';
 
-class MoviSlider extends StatefulWidget {
+class MovieSlider extends StatefulWidget {
 
   final List<Movie> movies;
   final String? title;
   final Function onNextPage;
 
-  const MoviSlider({super.key, required this.movies, this.title, required this.onNextPage});
+  const MovieSlider({super.key, required this.movies, this.title, required this.onNextPage});
 
   @override
-  State<MoviSlider> createState() => _MoviSliderState();
+  State<MovieSlider> createState() => _MovieSliderState();
 }
 
-class _MoviSliderState extends State<MoviSlider> {
+class _MovieSliderState extends State<MovieSlider> {
 
   final ScrollController scrollController = ScrollController();
 
@@ -39,7 +39,7 @@ class _MoviSliderState extends State<MoviSlider> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: 250,
       child:  Column(
